@@ -1,7 +1,7 @@
-var express = require('express')
-  , routes = require('./routes')
-  , path = require('path')
-  , serialport = require('serialport');
+var express = require('express');
+var routes = require('routes');
+var path = require('path');
+var serialport = require('serialport');
 
 
 // Serial Port
@@ -23,8 +23,7 @@ sp.on('data', function(input) {
     var jsonData;
     try {
         jsonData = JSON.parse(buffer);
-        console.log('temp: ' + jsonData.temp);
-        console.log('led: ' + jsonData.led);
+        console.log('tem: ' + jsonData.tem);
     } catch(e) {
         return;
     }

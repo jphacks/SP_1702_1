@@ -1,3 +1,10 @@
+/**
+ * 
+ * Otomo Device (TEAM：Funtastic)
+ * 
+ */
+
+
 #include "DHT.h"
 #include <Wire.h>
 #include "rgb_lcd.h"
