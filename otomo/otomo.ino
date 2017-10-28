@@ -1,4 +1,6 @@
 #include "DHT.h"
+#include <Wire.h>
+#include "rgb_lcd.h"
 
 //connect light temperature & humidity - A0
 #define DHTPIN A0
