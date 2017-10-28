@@ -16,7 +16,9 @@ void setup() {
 }
 
 void loop() {
-  
+
+  float hum = dht.readHumidity();     // humidity val
+  float tem = dht.readTemperature();  // temperature
   float lig = analogRead( LIGHT_SIG );  // light val
 
   //consol debug
