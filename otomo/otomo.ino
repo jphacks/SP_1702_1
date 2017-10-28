@@ -21,6 +21,13 @@ void setup() {
   Serial.begin( 9600 );
   dht.begin();
   pinMode( LIGHT_SIG, INPUT );
+
+  //lcd set
+  lcd.begin(16, 2);
+  lcd.setRGB(colorR, colorG, colorB);
+  // Print a message to the LCD.
+  lcd.print("Otomo");
+  delay(1000);
 }
 
 void loop() {
