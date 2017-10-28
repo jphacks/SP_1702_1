@@ -1,13 +1,14 @@
 #include "DHT.h"
 #include <Wire.h>
 #include "rgb_lcd.h"
+#include <ArduinoJson.h>
+
 
 //lcd
 rgb_lcd lcd;
 const int colorR = 0;
 const int colorG = 150;
 const int colorB = 255;
-
 
 
 //connect light temperature & humidity - A0
@@ -17,6 +18,9 @@ DHT dht( DHTPIN, DHTTYPE );
 
 //connect light sensor - A1
 #define LIGHT_SIG A1 
+
+//node
+#define PORT 3000
 
 
 void setup() {
@@ -29,34 +33,40 @@ void setup() {
   lcd.setRGB(colorR, colorG, colorB);
   // Print a message to the LCD.
   lcd.print("Otomo");
-  delay(1000);
 }
 
 void loop() {
   
-  float hum = dht.readHumidity();     // humidity val
-  float tem = dht.readTemperature();  // temperature
+  float hum = dht.readHumidity();       // humidity val
+  float tem = dht.readTemperature();    // temperature val
   float lig = analogRead( LIGHT_SIG );  // light val
 
-  //consol debug
-  if( isnan(tem) || isnan(hum) || isnan(lig) ){
-    Serial.println( "Failed to read from DHT" );
-  }else{
-    Serial.print( "Humidity: " );
-    Serial.print( hum );
-    Serial.print( " %\t" );
-    Serial.print( "Temperature: " );
-    Serial.print( tem );
-    Serial.print( " *C" );
-    Serial.print( " %\t" );
-    Serial.print( "Light: " );
-    Serial.println( lig );
-  }
+  int hum_i = hum;                      // humidity val (lcd)
+  int tem_i = tem;                      // temperature val (lcd)
+  int lig_i = lig;                      // light val (lcd)
 
+  //jsonBuffer
+  StaticJsonBuffer<200> jsonBuffer;
+
+
+  if( isnan(tem) || isnan(hum) || isnan(lig) ){
+    Serial.println( "Failed to read from DHT" );    
+  }else{
+    //make json
+    StaticJsonBuffer<200> jsonBuffer;
+    char buffer[256];
+    JsonObject& otomoSensor = jsonBuffer.createObject();
+
+    otomoSensor["hum"] = hum;
+    otomoSensor["tem"] = tem;
+    otomoSensor["lig"] = lig;
+    otomoSensor.printTo(buffer, sizeof(buffer));
+    
+    Serial.println(buffer); 
+
+  }
+  
   //lcd debug
-  int hum_i = hum;
-  int tem_i = tem;
-  int lig_i = lig;
   lcd.setCursor(0, 1);
   lcd.print(hum_i);
   lcd.print( "%, " );
@@ -64,6 +74,8 @@ void loop() {
   lcd.print( "C, " );
   lcd.print(lig_i);
   lcd.print( "L" );
+
+  delay(1000);
 
   
 }
