@@ -10,6 +10,8 @@ DHT dht( DHTPIN, DHTTYPE );
 #define LIGHT_SIG A1 
 
 void setup() {
+  Serial.begin( 9600 );
+  dht.begin();
   pinMode( LIGHT_SIG, INPUT );
 }
 
