@@ -2,6 +2,12 @@
 #include <Wire.h>
 #include "rgb_lcd.h"
 
+//lcd
+rgb_lcd lcd;
+const int colorR = 0;
+const int colorG = 150;
+const int colorB = 255;
+
 //connect light temperature & humidity - A0
 #define DHTPIN A0
 #define DHTTYPE DHT11
