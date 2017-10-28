@@ -8,14 +8,16 @@ const int colorR = 0;
 const int colorG = 150;
 const int colorB = 255;
 
+
+
 //connect light temperature & humidity - A0
 #define DHTPIN A0
 #define DHTTYPE DHT11
 DHT dht( DHTPIN, DHTTYPE );
 
-
 //connect light sensor - A1
 #define LIGHT_SIG A1 
+
 
 void setup() {
   Serial.begin( 9600 );
@@ -31,7 +33,7 @@ void setup() {
 }
 
 void loop() {
-
+  
   float hum = dht.readHumidity();     // humidity val
   float tem = dht.readTemperature();  // temperature
   float lig = analogRead( LIGHT_SIG );  // light val
@@ -55,6 +57,14 @@ void loop() {
   int hum_i = hum;
   int tem_i = tem;
   int lig_i = lig;
-  
+  lcd.setCursor(0, 1);
+  lcd.print(hum_i);
+  lcd.print( "%, " );
+  lcd.print(tem_i);
+  lcd.print( "C, " );
+  lcd.print(lig_i);
+  lcd.print( "L" );
 
+  
 }
+
