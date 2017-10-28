@@ -1,6 +1,8 @@
-void setup() {
-  // put your setup code here, to run once:
+//connect light sensor - A1
+#define LIGHT_SIG A1 
 
+void setup() {
+  pinMode( LIGHT_SIG, INPUT );
 }
 
 void loop() {
