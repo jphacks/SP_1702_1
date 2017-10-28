@@ -50,6 +50,11 @@ void loop() {
     Serial.print( "Light: " );
     Serial.println( lig );
   }
+
+  //lcd debug
+  int hum_i = hum;
+  int tem_i = tem;
+  int lig_i = lig;
   
 
 }
