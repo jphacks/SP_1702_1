@@ -1,3 +1,11 @@
+#include "DHT.h"
+
+//connect light temperature & humidity - A0
+#define DHTPIN A0
+#define DHTTYPE DHT11
+DHT dht( DHTPIN, DHTTYPE );
+
+
 //connect light sensor - A1
 #define LIGHT_SIG A1 
 
