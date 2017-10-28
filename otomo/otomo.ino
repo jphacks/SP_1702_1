@@ -25,6 +25,13 @@ void loop() {
   if( isnan(tem) || isnan(hum) || isnan(lig) ){
     Serial.println( "Failed to read from DHT" );
   }else{
+    Serial.print( "Humidity: " );
+    Serial.print( hum );
+    Serial.print( " %\t" );
+    Serial.print( "Temperature: " );
+    Serial.print( tem );
+    Serial.print( " *C" );
+    Serial.print( " %\t" );
     Serial.print( "Light: " );
     Serial.println( lig );
   }
